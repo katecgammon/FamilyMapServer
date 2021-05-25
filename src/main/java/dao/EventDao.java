@@ -41,6 +41,7 @@ public class EventDao {
             stmt.setInt(9, event.getYear());
 
             stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             throw new DataAccessException("Error encountered while inserting into the database");
         }

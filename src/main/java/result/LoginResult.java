@@ -1,14 +1,14 @@
 package result;
 
 public class LoginResult {
-    private String authToken;
+    private String authtoken;
     private String username;
     private String personID;
     private String message;
     private boolean success = false;
 
     public LoginResult(String token, String username, String personID) {
-        this.authToken = token;
+        this.authtoken = token;
         this.username = username;
         this.personID = personID;
     }
@@ -16,11 +16,11 @@ public class LoginResult {
     public LoginResult() {}
 
     public String getAuthToken() {
-        return authToken;
+        return authtoken;
     }
 
     public void setAuthToken(String token) {
-        this.authToken = token;
+        this.authtoken = token;
     }
 
     public String getUsername() {

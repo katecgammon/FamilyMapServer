@@ -27,7 +27,7 @@ public class LoginService {
         LoginResult result = new LoginResult();
 
         try {
-            db.openConnection();
+            //db.openConnection();
 
             if (!userDao.verify(r.getUsername(), r.getPassword())) {
                 throw new DataAccessException("Username and Password don't match");

@@ -40,6 +40,7 @@ public class PersonDao {
             stmt.setString(8, person.getSpouseID());
 
             stmt.executeUpdate();
+            conn.commit();
         } catch (SQLException e) {
             throw new DataAccessException("Error encountered while inserting into the database");
         }

@@ -1,7 +1,7 @@
 package result;
 
 public class ClearResult {
-    private String message = "Clear succeeded";
+    private String message = "Clear failed.";
     private boolean success = false;
 
     public ClearResult() {

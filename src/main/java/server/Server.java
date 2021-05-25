@@ -3,6 +3,7 @@ package server;
 import java.io.*;
 import java.net.*;
 import com.sun.net.httpserver.*;
+import handler.ClearHandler;
 import handler.FileHandler;
 import handler.LoginHandler;
 import handler.RegisterHandler;
@@ -81,6 +82,7 @@ public class Server {
         server.createContext("/", new FileHandler());
         server.createContext("/user/login", new LoginHandler());
         server.createContext("/user/register", new RegisterHandler());
+        server.createContext("/clear", new ClearHandler());
         //server.createContext("/games/list", new ListGamesHandler());
 
         // Create and install the HTTP handler for the "/routes/claim" URL path.
