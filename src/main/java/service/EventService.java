@@ -1,38 +1,39 @@
 package service;
 
 import dao.*;
+import model.Event;
 import model.Person;
+import result.EventResult;
 import result.PersonResult;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
-public class PersonService {
+public class EventService {
 
     /**
      *
-     * Finds all of the family members of the user
+     * Returns all the events for all the members in the family. Or it throws an error.
      *
-     * @return array of person objects and success message. Or throws an error.
+     * @return an array of Event objects and a success message or it throws an error.
      */
-    public PersonResult findAllPeople(String authToken) throws DataAccessException {
+    public EventResult findAllEvents(String authToken) throws DataAccessException {
         Database db = new Database();
         Connection conn = db.getConnection();
-        PersonDao personDao = new PersonDao(conn);
-        ArrayList<Person> persons;
-        PersonResult result = new PersonResult();
+        EventDao eventDao = new EventDao(conn);
+        ArrayList<Event> events;
+        EventResult result = new EventResult();
         AuthTokenDao aDao = new AuthTokenDao(conn);
 
         try {
-            persons = personDao.getAllPersons(aDao.find(authToken).getUsername());
-            if (persons == null) {
+            events = eventDao.getAllEvents(aDao.find(authToken).getUsername());
+            if (events == null) {
                 throw new DataAccessException("Invalid AuthToken");
             }
-            //Person[] personArray = (Person[]) persons.toArray();
-            Person[] personArr = new Person[persons.size()];
-            personArr = persons.toArray(personArr);
+            Event[] eventArr = new Event[events.size()];
+            eventArr = events.toArray(eventArr);
             db.closeConnection(true);
-            result = new PersonResult(personArr);
+            result = new EventResult(eventArr);
             result.setSuccess(true);
 
         }
@@ -42,7 +43,7 @@ public class PersonService {
                 result.setMessage("Invalid AuthToken");
             }
             else {
-                result.setMessage("Error: Problem in getting all persons");
+                result.setMessage("Error: Problem in getting all events");
             }
             db.closeConnection(false);
         }
@@ -50,35 +51,36 @@ public class PersonService {
     }
 
 
+
     /**
      *
-     * Searches the Person table and returns the Person with the correct ID.
+     * Searches the event table and returns the event with the correct ID.
      *
-     * @return the single Person object with the specified ID
+     * @return the single event object with the specified ID
      */
-    public PersonResult findPerson(String personID, String authToken) throws DataAccessException {
+    public EventResult find(String eventID, String authToken) throws DataAccessException {
         Database db = new Database();
         Connection conn = db.getConnection();
-        PersonDao personDao = new PersonDao(conn);
-        PersonResult result = new PersonResult();
+        EventDao eventDao = new EventDao(conn);
+        EventResult result = new EventResult();
         AuthTokenDao aDao = new AuthTokenDao(conn);
 
         try {
-            Person person;
+            Event event;
             if (aDao.find(authToken) == null) {
                 throw new DataAccessException("Invalid AuthToken");
             }
-            person = personDao.find(personID);
-            if (person == null) {
+            event = eventDao.find(eventID);
+            if (event == null) {
                 throw new DataAccessException("Invalid PersonID");
             }
             String usernameToCompare = aDao.find(authToken).getUsername();
-            if (!person.getAssociatedUsername().equals(usernameToCompare)) {
+            if (!event.getUsername().equals(usernameToCompare)) {
                 throw new DataAccessException("Requested person does not belong to this user");
             }
             db.closeConnection(true);
-            result = new PersonResult(person.getAssociatedUsername(), person.getPersonID(), person.getFirstName(),
-                    person.getLastName(), person.getGender(), person.getFatherID(), person.getMotherID(), person.getSpouseID());
+            result = new EventResult(event.getUsername(), event.getEventID(), event.getPersonID(), event.getLatitude(),
+                    event.getLongitude(), event.getCountry(), event.getCity(), event.getYear());
             result.setSuccess(true);
 
         }

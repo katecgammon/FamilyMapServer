@@ -12,6 +12,7 @@ public class EventResult {
     private String country;
     private String city;
     private int year;
+    private String message;
     private boolean success = false;
 
     public EventResult(Event[] data) {
@@ -29,6 +30,8 @@ public class EventResult {
         this.city = city;
         this.year = year;
     }
+
+    public EventResult() {}
 
     public Event[] getData() {
         return data;
@@ -109,4 +112,8 @@ public class EventResult {
     public void setSuccess(boolean success) {
         this.success = success;
     }
+
+    public String getMessage() { return message; }
+
+    public void setMessage(String message) { this.message = message; }
 }

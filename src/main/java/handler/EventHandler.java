@@ -5,7 +5,9 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
+import result.EventResult;
 import result.PersonResult;
+import service.EventService;
 import service.PersonService;
 
 import java.io.IOException;
@@ -13,12 +15,11 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 
-
-public class PersonHandler implements HttpHandler {
+public class EventHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
-        PersonService service = new PersonService();
-        PersonResult result;
+        EventService service = new EventService();
+        EventResult result;
         String authToken = new String();
         String URLPath = new String();
         Gson gson = new Gson();
@@ -36,10 +37,10 @@ public class PersonHandler implements HttpHandler {
 
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("get")) {
-                if (URLPath1.equals("/person")) {
-                    result = service.findAllPeople(authToken);
+                if (URLPath1.equals("/event")) {
+                    result = service.findAllEvents(authToken);
 
-                    if (result.getPeople() != null) {
+                    if (result.getData() != null) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }
                     else {
@@ -54,7 +55,7 @@ public class PersonHandler implements HttpHandler {
                     success = true;
                 }
                 else {
-                    result = service.findPerson(URLPath, authToken);
+                    result = service.find(URLPath, authToken);
                     if (result != null) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }

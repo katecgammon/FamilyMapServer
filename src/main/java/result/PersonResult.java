@@ -3,7 +3,7 @@ package result;
 import model.Person;
 
 public class PersonResult {
-    private Person[] persons;
+    private Person[] data;
     private String associatedUsername;
     private String personID;
     private String firstName;
@@ -12,11 +12,12 @@ public class PersonResult {
     private String fatherID = null;
     private String motherID = null;
     private String spouseID = null;
-    private boolean success = false;
     private String message;
+    private boolean success = false;
+
 
     public PersonResult(Person[] persons) {
-        this.persons = persons;
+        this.data = persons;
     }
 
     public PersonResult() {}
@@ -34,11 +35,11 @@ public class PersonResult {
     }
 
     public Person[] getPeople() {
-        return persons;
+        return data;
     }
 
     public void setPersons(Person[] people) {
-        this.persons = people;
+        this.data = people;
     }
 
     public String getAssociatedUsername() {

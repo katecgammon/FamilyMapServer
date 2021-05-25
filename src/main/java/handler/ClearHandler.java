@@ -1,16 +1,16 @@
 package handler;
 
-import java.io.*;
-import java.net.*;
 import com.google.gson.Gson;
-
-import com.sun.net.httpserver.*;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
-import request.LoginRequest;
 import result.ClearResult;
-import result.LoginResult;
 import service.ClearService;
-import service.LoginService;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.net.HttpURLConnection;
 
 
 public class ClearHandler implements HttpHandler {
@@ -20,10 +20,7 @@ public class ClearHandler implements HttpHandler {
         boolean success = false;
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("post")) {
-//                InputStream reqBody = exchange.getRequestBody();
-//                String reqData = readString(reqBody);
                 Gson gson = new Gson();
-//                LoginRequest request = (LoginRequest) gson.fromJson(reqData, LoginRequest.class);
                 ClearService service = new ClearService();
                 ClearResult result = service.clear();
 

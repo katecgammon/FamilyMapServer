@@ -127,7 +127,7 @@ public class PersonDao {
             }
         } catch (SQLException e) {
             e.printStackTrace();
-            throw new DataAccessException("Error encountered while getting all events");
+            throw new DataAccessException("Error encountered while getting all persons");
         } finally {
             if(rs != null) {
                 try {

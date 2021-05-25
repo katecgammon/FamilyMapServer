@@ -1,10 +1,8 @@
 package service;
 
-import dao.AuthTokenDao;
-import dao.DataAccessException;
-import dao.Database;
-import dao.UserDao;
+import dao.*;
 import model.AuthToken;
+import model.Person;
 import model.User;
 import request.RegisterRequest;
 import result.RegisterResult;
@@ -26,6 +24,7 @@ public class RegisterService {
         Database db = new Database();
         Connection conn = db.getConnection();
         UserDao userDao = new UserDao(conn);
+        PersonDao pDao = new PersonDao(conn);
         RegisterResult result = new RegisterResult();
 
         try {
@@ -43,6 +42,9 @@ public class RegisterService {
             User newUser = new User(r.getUsername(), r.getPassword(), r.getEmail(), r.getFirstName(),
                                     r.getLastName(), r.getGender(), personID);
             userDao.insert(newUser);
+            Person newPerson = new Person(personID, r.getUsername(), r.getFirstName(), r.getLastName(),
+                    r.getGender(), null, null, null);
+            pDao.insert(newPerson);
 
 
             db.closeConnection(true);
