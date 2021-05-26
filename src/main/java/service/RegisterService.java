@@ -28,12 +28,11 @@ public class RegisterService {
         RegisterResult result = new RegisterResult();
 
         try {
-            //db.openConnection();
 
             if (userDao.userAlreadyExists(r.getUsername())) {
                 throw new DataAccessException("Username already exists.");
             }
-            //Connection conn1 = db.getConnection();
+
             String personID = userDao.generatePersonID();
             AuthTokenDao authTokenDao = new AuthTokenDao(conn);
             AuthToken authToken = new AuthToken(authTokenDao.generateAuthToken(), r.getUsername());
@@ -50,12 +49,18 @@ public class RegisterService {
             db.closeConnection(true);
             result = new RegisterResult(authToken.getToken(), r.getUsername(), personID);
             result.setSuccess(true);
+            result.setMessage(null);
 
         }
         catch (DataAccessException ex) {
-            //TODO: This line doesn't work because result is null.
             result.setSuccess(false);
-            result.setMessage("Error: Could not register");
+            if (ex.toString().equals("dao.DataAccessException: Username already exists.")) {
+                result.setMessage("Error: Username already exists");
+            }
+            else {
+                result.setMessage("Error: Could not register");
+            }
+
             db.closeConnection(false);
         }
         return result;

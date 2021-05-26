@@ -34,7 +34,7 @@ public class FillResult {
         this.numEvents = numEvents;
     }
 
-    public boolean isSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 

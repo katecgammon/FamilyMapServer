@@ -28,6 +28,10 @@ public class LoginService {
 
         try {
 
+            //Check if username even exists
+            if (!userDao.userAlreadyExists(r.getUsername())) {
+                throw new DataAccessException("User doesn't exist");
+            }
             if (!userDao.verify(r.getUsername(), r.getPassword())) {
                 throw new DataAccessException("Username and Password don't match");
             }
@@ -43,7 +47,16 @@ public class LoginService {
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);
-            result.setMessage("Error: Could not login");
+            if (ex.toString().equals("dao.DataAccessException: User doesn't exist")) {
+                result.setMessage("Error: User doesn't exist");
+            }
+            else if (ex.toString().equals("dao.DataAccessException: Username and Password don't match")) {
+                result.setMessage("Error: Username and Password don't match");
+            }
+            else {
+                result.setMessage("Error: Could not login");
+            }
+
             db.closeConnection(false);
         }
         return result;

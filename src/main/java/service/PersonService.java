@@ -90,13 +90,13 @@ public class PersonService {
         catch (DataAccessException ex) {
             result.setSuccess(false);
             if (ex.toString().equals("dao.DataAccessException: Invalid AuthToken")) {
-                result.setMessage("Invalid AuthToken");
+                result.setMessage("Error: Invalid AuthToken");
             }
             else if (ex.toString().equals("dao.DataAccessException: Invalid PersonID")) {
-                result.setMessage("Invalid PersonID");
+                result.setMessage("Error: Invalid PersonID");
             }
             else if (ex.toString().equals("dao.DataAccessException: Requested person does not belong to this user")) {
-                result.setMessage("Requested person does not belong to this user");
+                result.setMessage("Error: Requested person does not belong to this user");
             }
             else {
                 result.setMessage("Error: Problem in getting person");

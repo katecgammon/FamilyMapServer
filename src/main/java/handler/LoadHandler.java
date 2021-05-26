@@ -1,18 +1,15 @@
 package handler;
 
-import com.sun.net.httpserver.*;
-import java.io.*;
-import java.net.*;
 import com.google.gson.Gson;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
 import request.LoadRequest;
-import request.LoginRequest;
 import result.LoadResult;
-import result.LoginResult;
 import service.LoadService;
-import service.LoginService;
 
-import java.io.IOException;
+import java.io.*;
+import java.net.HttpURLConnection;
 
 public class LoadHandler implements HttpHandler {
 
@@ -20,12 +17,12 @@ public class LoadHandler implements HttpHandler {
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;
         try {
-            //TODO: Figure out how to interpret this input data...
             if (exchange.getRequestMethod().toLowerCase().equals("post")) {
                 InputStream reqBody = exchange.getRequestBody();
                 String reqData = readString(reqBody);
                 Gson gson = new Gson();
                 LoadRequest request = (LoadRequest) gson.fromJson(reqData, LoadRequest.class);
+
                 LoadService service = new LoadService();
                 LoadResult result = service.load(request);
 

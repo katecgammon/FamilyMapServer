@@ -39,28 +39,27 @@ public class PersonHandler implements HttpHandler {
                 if (URLPath1.equals("/person")) {
                     result = service.findAllPeople(authToken);
 
-                    if (result.getPeople() != null) {
+                    if (result.getSuccess()) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }
                     else {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                        exchange.getResponseBody().close();
                     }
 
                     OutputStream resBody = exchange.getResponseBody();
                     String JSONString = gson.toJson(result);
                     writeString(JSONString, resBody);
                     resBody.close();
-                    success = true;
+                    success = result.getSuccess();
                 }
                 else {
                     result = service.findPerson(URLPath, authToken);
-                    if (result != null) {
+                    if (result.getSuccess()) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }
                     else {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                        exchange.getResponseBody().close();
+                        //exchange.getResponseBody().close();
                     }
 
                     OutputStream resBody = exchange.getResponseBody();

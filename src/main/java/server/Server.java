@@ -34,6 +34,7 @@ public class Server {
         server.createContext("/person", new PersonHandler());
         server.createContext("/event", new EventHandler());
         server.createContext("/load", new LoadHandler());
+        server.createContext("/fill", new FillHandler());
 
 
         System.out.println("Starting server");

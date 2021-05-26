@@ -94,4 +94,14 @@ public class AuthTokenDao {
             throw new DataAccessException("Error encountered while clearing the AuthToken table");
         }
     }
+
+    public void clearUser(String username) throws DataAccessException {
+        String sql = "DELETE FROM AuthToken WHERE username = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Error encountered while clearing AuthToken table");
+        }
+    }
 }

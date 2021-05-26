@@ -1,17 +1,15 @@
 package service;
 
 import dao.*;
-import model.AuthToken;
 import model.Event;
 import model.Person;
 import model.User;
 import request.LoadRequest;
 import result.LoadResult;
-import result.LoginResult;
 
 import java.sql.Connection;
 
-public class LoadService {
+public class    LoadService {
     /**
      *
      * Clears all data from the database,
@@ -20,7 +18,6 @@ public class LoadService {
      * @param r
      * @return a success message or it throws an error.
      */
-    //TODO: Test this!!!!
     public LoadResult load(LoadRequest r) throws DataAccessException {
         Database db = new Database();
         Connection conn = db.getConnection();
@@ -45,9 +42,8 @@ public class LoadService {
             }
 
             db.closeConnection(true);
-            result = new LoadResult(userArray.length, personArray.length, eventArray.length);
-            result.setMessage("Successfully added " + result.getNumUsers() + " users, " + result.getNumPersons() +
-                    " persons, and " + result.getNumEvents() + " events to the database.");
+            result.setMessage("Successfully added " + userArray.length + " users, " + personArray.length +
+                    " persons, and " + eventArray.length + " events to the database.");
             result.setSuccess(true);
 
         }

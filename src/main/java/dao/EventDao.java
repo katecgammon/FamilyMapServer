@@ -98,6 +98,16 @@ public class EventDao {
         }
     }
 
+    public void clearUser(String username) throws DataAccessException {
+        String sql = "DELETE FROM Events WHERE associatedUsername = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Error encountered while clearing Events table");
+        }
+    }
+
     /**
      *
      * @param eventID
@@ -110,7 +120,6 @@ public class EventDao {
         else return false;
     }
 
-    //TODO: Check if this works
     public ArrayList<Event> getAllEvents(String username) throws DataAccessException {
         ArrayList<Event> events = new ArrayList<Event>();
         ResultSet rs = null;

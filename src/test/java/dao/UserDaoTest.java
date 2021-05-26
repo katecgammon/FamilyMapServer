@@ -75,5 +75,18 @@ public class UserDaoTest {
         uDao.clear();
         assertNull(uDao.find(newUser.getUsername()));
     }
+
+    @Test
+    public void clearFromUserPass() throws DataAccessException {
+        uDao.insert(newUser);
+        User newUser1 = new User("jimmy", "kanyewest", "jimmybuckets@hotmail.net",
+                "james", "donkey", "m", "42420");
+        User newUser2 = new User("queenliz", "heir2thethrone", "stevemcqueen@gmail.com",
+                "steve", "McQueen", "m", "23570");
+        uDao.insert(newUser1);
+        uDao.insert(newUser2);
+        uDao.clearUser("jimmy");
+        assertNull(uDao.find("jimmy"));
+    }
 }
 

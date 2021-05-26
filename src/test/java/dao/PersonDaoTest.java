@@ -1,5 +1,6 @@
 package dao;
 
+import model.Event;
 import model.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -75,6 +76,19 @@ public class PersonDaoTest {
     public void clearPass() throws DataAccessException {
         pDao.clear();
         assertNull(pDao.find(newPerson.getPersonID()));
+    }
+
+    @Test
+    public void clearFromPersonPass() throws DataAccessException {
+        pDao.insert(newPerson);
+        Person newPerson1 = new Person("12345", "kanyeisking", "kanye",
+                "west", "m", "00000", "11111", "22222");
+        Person newPerson2 = new Person("99999", "bookofmormon", "joseph",
+                "smith", "m", "13322", "15577", "98765");
+        pDao.insert(newPerson1);
+        pDao.insert(newPerson2);
+        pDao.clearUser("bookofmormon");
+        assertNull(pDao.find("99999"));
     }
 }
 

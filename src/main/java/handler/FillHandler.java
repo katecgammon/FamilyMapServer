@@ -1,42 +1,60 @@
 package handler;
 
-import java.io.*;
-import java.net.*;
 import com.google.gson.Gson;
-
-import com.sun.net.httpserver.*;
+import com.sun.net.httpserver.HttpExchange;
+import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
-import request.LoginRequest;
-import result.LoginResult;
-import service.LoginService;
+import request.FillRequest;
+import request.LoadRequest;
+import result.FillResult;
+import result.LoadResult;
+import service.FillService;
+import service.LoadService;
 
-public class LoginHandler implements HttpHandler {
+import java.io.*;
+import java.net.HttpURLConnection;
+
+public class FillHandler implements HttpHandler{
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         boolean success = false;
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("post")) {
-                InputStream reqBody = exchange.getRequestBody();
-                String reqData = readString(reqBody);
                 Gson gson = new Gson();
-                LoginRequest request = (LoginRequest) gson.fromJson(reqData, LoginRequest.class);
-                LoginService service = new LoginService();
-                LoginResult result = service.login(request);
+                String URLPath = exchange.getRequestURI().toString();
+                URLPath = URLPath.substring("/fill/".length());
+                String toFind = "/";
+                int index = URLPath.indexOf(toFind);
+                String numGen;
+                int numGenerations;
+                String username;
+                if (index == -1) {
+                    numGenerations = 4;
+                    username = URLPath;
+                }
+                else {
+                    username = URLPath.substring(0, index);
+                    numGen = URLPath.substring(index + toFind.length());
+                    numGenerations = Integer.parseInt(numGen);
+                }
+                FillRequest request = new FillRequest(username, numGenerations);
+
+                FillService service = new FillService();
+                FillResult result = service.fill(request);
 
                 if (result.getSuccess()) {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                 }
                 else {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-
                 }
 
                 OutputStream resBody = exchange.getResponseBody();
                 String JSONString = gson.toJson(result);
                 writeString(JSONString, resBody);
                 resBody.close();
-                success = true;
+                success = result.getSuccess();
 
             }
         } catch (IOException | DataAccessException e) {

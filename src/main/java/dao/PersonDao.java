@@ -97,6 +97,16 @@ public class PersonDao {
         }
     }
 
+    public void clearUser(String username) throws DataAccessException {
+        String sql = "DELETE FROM Person WHERE associatedUsername = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Error encountered while clearing user table");
+        }
+    }
+
     /**
      *
      * @param personID

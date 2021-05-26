@@ -1,4 +1,4 @@
-package java.passoff;
+package passoff;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -207,6 +207,7 @@ public class ServerTest {
             //We are calling the register api for a user named sheila
             proxy.register(host, port, registerRequest);
             //We are calling the login api for a user named patrick
+
             LoginResult result = proxy.login(host, port, loginRequest2);
             //We just tried logging in with an invalid user, this checks to make sure loginResult reflects that
             assertFailedLogin(result);

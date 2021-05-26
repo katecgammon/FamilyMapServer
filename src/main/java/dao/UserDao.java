@@ -56,7 +56,6 @@ public class UserDao {
      *
      * Looks at the password of the given username in the table and returns true if the passwords match.
      */
-    //TODO: Make sure this is correct.
     public boolean verify(String username, String password) throws DataAccessException {
         String sql = "SELECT password FROM User WHERE username = ?;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -121,12 +120,22 @@ public class UserDao {
      *
      * Drops the user table
      */
-    void clear() throws DataAccessException{
+    public void clear() throws DataAccessException{
         String sql = "DELETE FROM User;";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.executeUpdate();
         } catch (SQLException e) {
             throw new DataAccessException("Error encountered while clearing the User table");
+        }
+    }
+
+    public void clearUser(String username) throws DataAccessException {
+        String sql = "DELETE FROM User WHERE username = ?";
+        try (PreparedStatement stmt = conn.prepareStatement(sql)) {
+            stmt.setString(1, username);
+            stmt.executeUpdate();
+        } catch (SQLException e) {
+            throw new DataAccessException("Error encountered while clearing user table");
         }
     }
 

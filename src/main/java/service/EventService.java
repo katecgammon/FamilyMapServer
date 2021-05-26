@@ -45,7 +45,7 @@ public class EventService {
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);
-            if (ex.toString().equals("Invalid AuthToken")) {
+            if (ex.toString().equals("dao.DataAccessException: Invalid AuthToken")) {
                 result.setMessage("Invalid AuthToken");
             }
             else {
