@@ -2,9 +2,7 @@ package service;
 
 import dao.DataAccessException;
 import dao.Database;
-import dao.PersonDao;
 import dao.UserDao;
-import model.Person;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -14,7 +12,8 @@ import result.LoginResult;
 
 import java.sql.Connection;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 public class LoginServiceTest {
     private Database db;

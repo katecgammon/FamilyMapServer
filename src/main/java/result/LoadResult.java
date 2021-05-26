@@ -13,6 +13,8 @@ public class LoadResult {
         this.numEvents = numEvents;
     }
 
+    public LoadResult() {}
+
     public String getMessage() {
         return message;
     }
@@ -44,4 +46,8 @@ public class LoadResult {
     public void setNumEvents(int numEvents) {
         this.numEvents = numEvents;
     }
+
+    public boolean getSuccess() { return success; }
+
+    public void setSuccess(boolean success) { this.success = success; }
 }

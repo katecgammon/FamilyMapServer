@@ -7,9 +7,9 @@ public class AuthToken {
     private String authToken;
     private String username;
 
-    public AuthToken(String token, String personID) {
+    public AuthToken(String token, String username) {
         this.authToken = token;
-        this.username = personID;
+        this.username = username;
     }
 
     public String generateAuthToken() {

@@ -1,6 +1,7 @@
 package service;
 
 import dao.*;
+import model.AuthToken;
 import model.Person;
 import result.PersonResult;
 
@@ -24,7 +25,11 @@ public class PersonService {
         AuthTokenDao aDao = new AuthTokenDao(conn);
 
         try {
-            persons = personDao.getAllPersons(aDao.find(authToken).getUsername());
+            AuthToken foundToken = aDao.find(authToken);
+            if (foundToken == null) {
+                throw new DataAccessException("Invalid AuthToken");
+            }
+            persons = personDao.getAllPersons(foundToken.getUsername());
             if (persons == null) {
                 throw new DataAccessException("Invalid AuthToken");
             }

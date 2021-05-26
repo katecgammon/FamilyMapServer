@@ -1,6 +1,7 @@
 package service;
 
 import dao.*;
+import model.AuthToken;
 import model.Event;
 import model.Person;
 import result.EventResult;
@@ -17,6 +18,7 @@ public class EventService {
      *
      * @return an array of Event objects and a success message or it throws an error.
      */
+    //TODO: Test this!!!!
     public EventResult findAllEvents(String authToken) throws DataAccessException {
         Database db = new Database();
         Connection conn = db.getConnection();
@@ -26,6 +28,10 @@ public class EventService {
         AuthTokenDao aDao = new AuthTokenDao(conn);
 
         try {
+            AuthToken foundToken = aDao.find(authToken);
+            if (foundToken == null) {
+                throw new DataAccessException("Invalid AuthToken");
+            }
             events = eventDao.getAllEvents(aDao.find(authToken).getUsername());
             if (events == null) {
                 throw new DataAccessException("Invalid AuthToken");
