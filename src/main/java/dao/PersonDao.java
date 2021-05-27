@@ -129,11 +129,11 @@ public class PersonDao {
     public ArrayList<Person> getAllPersons(String username) throws DataAccessException {
         ArrayList<Person> persons = new ArrayList<Person>();
         ResultSet rs = null;
-        String sql = "SELECT * FROM Person WHERE AssociatedUsername = ?;";
+        String sql = "SELECT * FROM Person WHERE associatedUsername = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             rs = stmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Person person;
                 person = new Person(rs.getString("personID"), rs.getString("AssociatedUsername"),
                         rs.getString("firstName"), rs.getString("lastName"),

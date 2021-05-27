@@ -4,6 +4,7 @@ import dao.*;
 import model.AuthToken;
 import model.Event;
 import model.Person;
+import result.AllEventResult;
 import result.EventResult;
 import result.PersonResult;
 
@@ -18,13 +19,12 @@ public class EventService {
      *
      * @return an array of Event objects and a success message or it throws an error.
      */
-    //TODO: Test this!!!!
-    public EventResult findAllEvents(String authToken) throws DataAccessException {
+    public AllEventResult findAllEvents(String authToken) throws DataAccessException {
         Database db = new Database();
         Connection conn = db.getConnection();
         EventDao eventDao = new EventDao(conn);
         ArrayList<Event> events;
-        EventResult result = new EventResult();
+        AllEventResult result = new AllEventResult();
         AuthTokenDao aDao = new AuthTokenDao(conn);
 
         try {
@@ -39,14 +39,14 @@ public class EventService {
             Event[] eventArr = new Event[events.size()];
             eventArr = events.toArray(eventArr);
             db.closeConnection(true);
-            result = new EventResult(eventArr);
+            result = new AllEventResult(eventArr);
             result.setSuccess(true);
 
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);
             if (ex.toString().equals("dao.DataAccessException: Invalid AuthToken")) {
-                result.setMessage("Invalid AuthToken");
+                result.setMessage("Error: Invalid AuthToken");
             }
             else {
                 result.setMessage("Error: Problem in getting all events");

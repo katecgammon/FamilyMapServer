@@ -10,7 +10,6 @@ import model.Person;
 import model.User;
 import request.FillRequest;
 import result.FillResult;
-import result.LoginResult;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -74,7 +73,6 @@ public class FillService {
             currentPerson = new Person(currentUser.getPersonID(), currentUser.getUsername(), currentUser.getFirstName(),
                     currentUser.getLastName(), currentUser.getGender(), null, null, null);
             Location loc = locData.getLocationAt(randNumber("location"));
-            //TODO: Figure out how to get the year.
             Event userBirth = new Event(eventDao.generateEventID(), currentUser.getUsername(), currentUser.getPersonID(),
                     loc.getLatitude(), loc.getLongitude(), loc.getCountry(), loc.getCity(), "birth", randYear(1901, 2021));
 
@@ -170,10 +168,6 @@ public class FillService {
             numEvents += 6;
             numPersons += 2;
         }
-
-
-
-
     }
 
     private int randNumber(String type) {
@@ -195,10 +189,7 @@ public class FillService {
         return int_random;
     }
 
-    private int randYear(int min, int max) {
-        //BIRTH: min would be child's birth minus 25, max would be child's birth minus 50
-        //DEATH: min would be after marriage, max would be birth + 120
-        //MARRIAGE: min would be birth + 13, max would be the least of the two deaths.
+    public int randYear(int min, int max) {
         Random rand = new Random();
         return rand.nextInt(max - min) + min;
     }

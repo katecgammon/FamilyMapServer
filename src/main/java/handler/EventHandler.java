@@ -5,6 +5,7 @@ import com.sun.net.httpserver.Headers;
 import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
+import result.AllEventResult;
 import result.EventResult;
 import service.EventService;
 
@@ -17,6 +18,7 @@ public class EventHandler implements HttpHandler {
     @Override
     public void handle(HttpExchange exchange) throws IOException {
         EventService service = new EventService();
+        AllEventResult aResult;
         EventResult result;
         String authToken = new String();
         String URLPath = new String();
@@ -36,21 +38,21 @@ public class EventHandler implements HttpHandler {
         try {
             if (exchange.getRequestMethod().toLowerCase().equals("get")) {
                 if (URLPath1.equals("/event")) {
-                    result = service.findAllEvents(authToken);
+                    aResult = service.findAllEvents(authToken);
 
-                    if (result.getData() != null) {
+                    if (aResult.getSuccess()) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }
                     else {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                        exchange.getResponseBody().close();
+
                     }
 
                     OutputStream resBody = exchange.getResponseBody();
-                    String JSONString = gson.toJson(result);
+                    String JSONString = gson.toJson(aResult);
                     writeString(JSONString, resBody);
                     resBody.close();
-                    success = true;
+                    success = aResult.getSuccess();
                 }
                 else {
                     result = service.find(URLPath, authToken);

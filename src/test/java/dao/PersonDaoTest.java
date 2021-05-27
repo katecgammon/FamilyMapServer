@@ -90,5 +90,13 @@ public class PersonDaoTest {
         pDao.clearUser("bookofmormon");
         assertNull(pDao.find("99999"));
     }
+
+
+    @Test
+    public void generatePersonIDPass() {
+        String ID = pDao.generatePersonID();
+        assertNotNull(ID);
+    }
+
 }
 

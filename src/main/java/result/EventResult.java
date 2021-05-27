@@ -3,7 +3,7 @@ package result;
 import model.Event;
 
 public class EventResult {
-    private Event[] data;
+
     private String associatedUsername;
     private String eventID;
     private String personID;
@@ -16,9 +16,7 @@ public class EventResult {
     private String message;
     private boolean success = false;
 
-    public EventResult(Event[] data) {
-        this.data = data;
-    }
+
 
     public EventResult(String associatedUsername, String eventID, String personID, float latitude,
                        float longitude, String country, String city, String eventType, int year) {
@@ -35,13 +33,7 @@ public class EventResult {
 
     public EventResult() {}
 
-    public Event[] getData() {
-        return data;
-    }
 
-    public void setData(Event[] data) {
-        this.data = data;
-    }
 
     public String getAssociatedUsername() {
         return associatedUsername;

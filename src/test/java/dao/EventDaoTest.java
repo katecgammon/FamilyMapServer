@@ -3,6 +3,7 @@ package dao;
 import dao.DataAccessException;
 import dao.Database;
 import dao.EventDao;
+import model.AuthToken;
 import model.Event;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -12,7 +13,6 @@ import java.sql.Connection;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-//We will use this to test that our insert method is working and failing in the right ways
 public class EventDaoTest {
     private Database db;
     private Event bestEvent;
@@ -47,6 +47,27 @@ public class EventDaoTest {
     public void insertFail() throws DataAccessException {
         eDao.insert(bestEvent);
         assertThrows(DataAccessException.class, ()-> eDao.insert(bestEvent));
+    }
+
+    @Test
+    public void findPass() throws DataAccessException {
+        eDao.insert(bestEvent);
+        Event newEvent1 = new Event("19238", "kate123", "12345", (float)81.6, (float)-15.3333,
+                "Denmark","Nord", "Death", 1850);
+        eDao.insert(newEvent1);
+        Event compareTest = eDao.find("Biking_123A");
+        assertNotNull(compareTest);
+        assertEquals(bestEvent, compareTest);
+    }
+
+    @Test
+    public void findFail() throws DataAccessException {
+        eDao.insert(bestEvent);
+        Event newEvent1 = new Event("19238", "kate123", "12345", (float)81.6, (float)-15.3333,
+                "Denmark","Nord", "Death", 1850);
+        eDao.insert(newEvent1);
+        Event compareTest = eDao.find("00000");
+        assertNull(compareTest);
     }
 
     @Test

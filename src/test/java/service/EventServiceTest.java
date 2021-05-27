@@ -8,6 +8,7 @@ import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import result.AllEventResult;
 import result.EventResult;
 import result.PersonResult;
 
@@ -51,6 +52,7 @@ public class EventServiceTest {
 
     @Test
     public void findAllEventsPass() throws DataAccessException {
+        AllEventResult result1;
         uDao.insert(newUser);
         aDao.insert(token);
         eDao.insert(newEvent);
@@ -58,16 +60,17 @@ public class EventServiceTest {
                 "Denmark","Nord", "Death", 1850);
         eDao.insert(newEvent1);
         Event[] events = {newEvent, newEvent1};
-        result = new EventResult(events);
-        EventResult allEventsResult = service.findAllEvents("882393412834719");
+        result1 = new AllEventResult(events);
+        AllEventResult allEventsResult = service.findAllEvents("882393412834719");
         assertNotNull(allEventsResult);
         for (int i = 0; i < allEventsResult.getData().length; i++) {
-            assertEquals(result.getData()[i], allEventsResult.getData()[i]);
+            assertEquals(result1.getData()[i], allEventsResult.getData()[i]);
         }
     }
 
     @Test
     public void findAllEventsFail() throws DataAccessException {
+        AllEventResult result1;
         uDao.insert(newUser);
         aDao.insert(token);
         eDao.insert(newEvent);
@@ -75,8 +78,8 @@ public class EventServiceTest {
                 "Denmark","Nord", "Death", 1850);
         eDao.insert(newEvent1);
         Event[] events = {newEvent, newEvent1};
-        result = new EventResult(events);
-        EventResult allEventsResult = service.findAllEvents("1934239280");
+        result1 = new AllEventResult(events);
+        AllEventResult allEventsResult = service.findAllEvents("1934239280");
         assertEquals("Error: Problem in getting all events", allEventsResult.getMessage());
     }
 

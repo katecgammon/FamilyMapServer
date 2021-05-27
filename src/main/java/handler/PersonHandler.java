@@ -59,14 +59,13 @@ public class PersonHandler implements HttpHandler {
                     }
                     else {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                        //exchange.getResponseBody().close();
                     }
 
                     OutputStream resBody = exchange.getResponseBody();
                     String JSONString = gson.toJson(result);
                     writeString(JSONString, resBody);
                     resBody.close();
-                    success = true;
+                    success = result.getSuccess();
                 }
             }
         } catch (IOException | DataAccessException e) {

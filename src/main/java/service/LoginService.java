@@ -37,6 +37,7 @@ public class LoginService {
             }
             String userName = r.getUsername();
             String personID = userDao.find(r.getUsername()).getPersonID();
+            authTokenDao.clearUser(userName);
             AuthToken authToken = new AuthToken(authTokenDao.generateAuthToken(), userName);
             authTokenDao.insert(authToken);
             

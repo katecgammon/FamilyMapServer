@@ -134,7 +134,7 @@ public class EventDao {
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
             stmt.setString(1, username);
             rs = stmt.executeQuery();
-            if (rs.next()) {
+            while (rs.next()) {
                 Event event;
                 event = new Event(rs.getString("EventID"), rs.getString("AssociatedUsername"),
                         rs.getString("PersonID"), rs.getFloat("Latitude"), rs.getFloat("Longitude"),
