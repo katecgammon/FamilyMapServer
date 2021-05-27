@@ -1,7 +1,6 @@
 package dao;
 
 import model.Event;
-
 import java.sql.*;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -14,29 +13,25 @@ public class EventDao {
         this.conn = conn;
     }
 
-
-
     public String generateEventID() {
         UUID ID = UUID.randomUUID();
         return ID.toString();
     }
+
     /**
      * inserts a new Event into the event table
      * @param event
      * @throws DataAccessException
      */
     public void insert(Event event) throws DataAccessException {
-        //We can structure our string to be similar to a sql command, but if we insert question
-        //marks we can change them later with help from the statement
+
         if (eventAlreadyExists((event.getPersonID()))) {
             throw new DataAccessException("Event already exists!");
         }
         String sql = "INSERT INTO Events (EventID, AssociatedUsername, PersonID, Latitude, Longitude, " +
                 "Country, City, EventType, Year) VALUES(?,?,?,?,?,?,?,?,?)";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
-            //Using the statements built-in set(type) functions we can pick the question mark we want
-            //to fill in and give it a proper value. The first argument corresponds to the first
-            //question mark found in our sql String
+
             stmt.setString(1, event.getEventID());
             stmt.setString(2, event.getUsername());
             stmt.setString(3, event.getPersonID());
@@ -85,7 +80,6 @@ public class EventDao {
                     e.printStackTrace();
                 }
             }
-
         }
         return null;
     }
@@ -105,6 +99,12 @@ public class EventDao {
         }
     }
 
+    /**
+     *
+     * @throws DataAccessException
+     *
+     * Deletes Events that are related to the username
+     */
     public void clearUser(String username) throws DataAccessException {
         String sql = "DELETE FROM Events WHERE associatedUsername = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -127,6 +127,12 @@ public class EventDao {
         else return false;
     }
 
+    /**
+     *
+     * @param username of user
+     * @return ArrayList of all the events related to the user
+     * @throws DataAccessException
+     */
     public ArrayList<Event> getAllEvents(String username) throws DataAccessException {
         ArrayList<Event> events = new ArrayList<Event>();
         ResultSet rs = null;
@@ -153,9 +159,7 @@ public class EventDao {
                     e.printStackTrace();
                 }
             }
-
         }
-
         return events;
     }
 }

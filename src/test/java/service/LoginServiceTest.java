@@ -56,7 +56,7 @@ public class LoginServiceTest {
         User user1 = new User("angel", "PASSword", "angel@gmail.com",
                 "Angel", "Face", "m", "13542");
         uDao.insert(user1);
-        assertEquals("Error: Could not login", loginService.login(loginRequest).getMessage());
+        assertEquals("Error: User doesn't exist", loginService.login(loginRequest).getMessage());
     }
 
 }

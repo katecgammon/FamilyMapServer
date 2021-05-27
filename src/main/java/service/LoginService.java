@@ -7,7 +7,6 @@ import dao.UserDao;
 import model.AuthToken;
 import request.LoginRequest;
 import result.LoginResult;
-
 import java.sql.Connection;
 
 public class LoginService {
@@ -27,8 +26,6 @@ public class LoginService {
         LoginResult result = new LoginResult();
 
         try {
-
-            //Check if username even exists
             if (!userDao.userAlreadyExists(r.getUsername())) {
                 throw new DataAccessException("User doesn't exist");
             }
@@ -40,7 +37,6 @@ public class LoginService {
             authTokenDao.clearUser(userName);
             AuthToken authToken = new AuthToken(authTokenDao.generateAuthToken(), userName);
             authTokenDao.insert(authToken);
-            
 
             db.closeConnection(true);
             result = new LoginResult(authToken.getToken(), r.getUsername(), personID);
@@ -58,10 +54,8 @@ public class LoginService {
             else {
                 result.setMessage("Error: Could not login");
             }
-
             db.closeConnection(false);
         }
         return result;
     }
-
 }

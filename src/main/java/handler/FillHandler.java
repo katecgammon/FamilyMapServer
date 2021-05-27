@@ -51,7 +51,6 @@ public class FillHandler implements HttpHandler{
                 writeString(JSONString, resBody);
                 resBody.close();
                 success = result.getSuccess();
-
             }
         } catch (IOException | DataAccessException e) {
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);

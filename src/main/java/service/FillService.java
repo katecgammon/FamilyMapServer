@@ -63,9 +63,7 @@ public class FillService {
             if (userDao.find(r.getUsername()) == null) {
                 throw new DataAccessException("Username doesn't exist");
             }
-            //userDao.clearUser(r.getUsername());
             personDao.clearUser(r.getUsername());
-            //authTokenDao.clearUser(r.getUsername());
             eventDao.clearUser(r.getUsername());
 
             //Create currentUser into a new Person
@@ -112,11 +110,9 @@ public class FillService {
             Person father = new Person(personDao.generatePersonID(), currentPerson.getAssociatedUsername(), mNameData.getNameAt(randNumber("mname")),
                     sNameData.getNameAt(randNumber("sname")), "m", null, null, mother.getPersonID());
 
-
             child.setMotherID(mother.getPersonID());
             child.setFatherID(father.getPersonID());
             mother.setSpouseID(father.getPersonID());
-            //TODO: Create events
 
             //CREATES 3 RANDOM EVENTS FOR EACH PARENT
             Location momBirthLocation = locData.getLocationAt(randNumber("location"));

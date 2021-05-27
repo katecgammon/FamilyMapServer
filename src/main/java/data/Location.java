@@ -6,14 +6,9 @@ public class Location {
     String city;
     String country;
 
-    public float getLatitude() {
-        return Float.parseFloat(latitude);
-    }
+    public float getLatitude() { return Float.parseFloat(latitude); }
 
-    public float getLongitude() {
-        return Float.parseFloat(longitude);
-
-    }
+    public float getLongitude() { return Float.parseFloat(longitude); }
 
     public String getCity() {
         return city;

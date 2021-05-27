@@ -9,15 +9,11 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import result.ClearResult;
-
 import java.sql.Connection;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 public class ClearServiceTest {
     private Database db;
-    LoginService loginService = new LoginService();
-    ClearResult result;
     UserDao uDao;
     User newUser;
     AuthTokenDao aDao;
@@ -35,7 +31,6 @@ public class ClearServiceTest {
         aDao = new AuthTokenDao(conn);
         eDao = new EventDao(conn);
         pDao = new PersonDao(conn);
-
     }
 
     @AfterEach
@@ -64,7 +59,5 @@ public class ClearServiceTest {
         ClearResult result = ClearService.clear();
         assertNotNull(result);
         assertEquals("Clear succeeded.", result.getMessage());
-
-
     }
 }

@@ -7,7 +7,6 @@ import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
 import result.PersonResult;
 import service.PersonService;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -23,8 +22,8 @@ public class PersonHandler implements HttpHandler {
         String URLPath = new String();
         Gson gson = new Gson();
         boolean success = false;
-
         String URLPath1 = exchange.getRequestURI().toString();
+
         if (!URLPath1.equals("/person")) {
             URLPath = URLPath1.substring("/person/".length());
         }
@@ -38,7 +37,6 @@ public class PersonHandler implements HttpHandler {
             if (exchange.getRequestMethod().toLowerCase().equals("get")) {
                 if (URLPath1.equals("/person")) {
                     result = service.findAllPeople(authToken);
-
                     if (result.getSuccess()) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }

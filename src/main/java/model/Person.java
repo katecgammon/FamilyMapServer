@@ -24,114 +24,66 @@ public class Person {
         this.spouseID = spouseID;
     }
 
-    /**
-     * Get the Person ID
-     */
     public String getPersonID() {
         return personID;
     }
 
-    /**
-     * Set the Person ID
-     */
     public void setPersonID(String personID) {
         this.personID = personID;
     }
 
-    /**
-     * Get the associated username
-     */
     public String getAssociatedUsername() {
         return associatedUsername;
     }
 
-    /**
-     * Set the associated username
-     */
     public void setAssociatedUsername(String associatedUsername) {
         this.associatedUsername = associatedUsername;
     }
 
-    /**
-     * Get the first name
-     */
     public String getFirstName() {
         return firstName;
     }
 
-    /**
-     * Set the first name
-     */
     public void setFirstName(String firstName) {
         this.firstName = firstName;
     }
 
-    /**
-     * Get the last name
-     */
     public String getLastName() {
         return lastName;
     }
 
-    /**
-     * Set the last name
-     */
     public void setLastName(String lastName) {
         this.lastName = lastName;
     }
 
-    /**
-     * Get the gender
-     */
     public String getGender() {
         return gender;
     }
 
-    /**
-     * Set the gender
-     */
     public void setGender(String gender) {
         this.gender = gender;
     }
 
-    /**
-     * Get the Father ID
-     */
     public String getFatherID() {
         return fatherID;
     }
 
-    /**
-     * Set the Father ID
-     */
     public void setFatherID(String fatherID) {
         this.fatherID = fatherID;
     }
 
-    /**
-     * Get the Mother ID
-     */
     public String getMotherID() {
         return motherID;
     }
 
-    /**
-     * Set the Mother ID
-     */
     public void setMotherID(String motherID) {
         this.motherID = motherID;
     }
 
-    /**
-     * Get the Spouse ID
-     */
     public String getSpouseID() {
         return spouseID;
     }
 
-    /**
-     * Set the Spouse ID
-     */
     public void setSpouseID(String spouseID) {
         this.spouseID = spouseID;
     }
@@ -150,5 +102,4 @@ public class Person {
                 Objects.equals(motherID, person.motherID) &&
                 Objects.equals(spouseID, person.spouseID);
     }
-
 }

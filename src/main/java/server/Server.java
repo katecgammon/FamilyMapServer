@@ -26,7 +26,6 @@ public class Server {
 
         server.setExecutor(null);
         System.out.println("Creating contexts");
-
         server.createContext("/", new FileHandler());
         server.createContext("/user/login", new LoginHandler());
         server.createContext("/user/register", new RegisterHandler());

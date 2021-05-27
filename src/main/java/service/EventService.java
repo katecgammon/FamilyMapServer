@@ -3,11 +3,8 @@ package service;
 import dao.*;
 import model.AuthToken;
 import model.Event;
-import model.Person;
 import result.AllEventResult;
 import result.EventResult;
-import result.PersonResult;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -41,7 +38,6 @@ public class EventService {
             db.closeConnection(true);
             result = new AllEventResult(eventArr);
             result.setSuccess(true);
-
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);
@@ -55,8 +51,6 @@ public class EventService {
         }
         return result;
     }
-
-
 
     /**
      *
@@ -88,7 +82,6 @@ public class EventService {
             result = new EventResult(event.getUsername(), event.getEventID(), event.getPersonID(), event.getLatitude(),
                     event.getLongitude(), event.getCountry(), event.getCity(), event.getEventType(), event.getYear());
             result.setSuccess(true);
-
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);

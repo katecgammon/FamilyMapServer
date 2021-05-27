@@ -1,16 +1,12 @@
 package dao;
 
-import model.Event;
 import model.Person;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.sql.Connection;
-
 import static org.junit.jupiter.api.Assertions.*;
 
-//We will use this to test that our insert method is working and failing in the right ways
 public class PersonDaoTest {
     private Database db;
     private Person newPerson;
@@ -90,7 +86,6 @@ public class PersonDaoTest {
         pDao.clearUser("bookofmormon");
         assertNull(pDao.find("99999"));
     }
-
 
     @Test
     public void generatePersonIDPass() {

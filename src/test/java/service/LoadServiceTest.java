@@ -16,7 +16,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LoadServiceTest {
     private Database db;
     LoadService service = new LoadService();
-    LoadResult result;
     LoadRequest request;
     UserDao uDao;
     User newUser;

@@ -1,8 +1,6 @@
 package dao;
 
-import model.Event;
 import model.Person;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -83,7 +81,6 @@ public class PersonDao {
                     e.printStackTrace();
                 }
             }
-
         }
         return null;
     }
@@ -103,6 +100,11 @@ public class PersonDao {
         }
     }
 
+    /**
+     * @throws DataAccessException
+     *
+     * Deletes all people if they are related to the username
+     */
     public void clearUser(String username) throws DataAccessException {
         String sql = "DELETE FROM Person WHERE associatedUsername = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {
@@ -125,7 +127,6 @@ public class PersonDao {
         else return false;
     }
 
-    //TODO: Check if this works.
     public ArrayList<Person> getAllPersons(String username) throws DataAccessException {
         ArrayList<Person> persons = new ArrayList<Person>();
         ResultSet rs = null;
@@ -152,9 +153,7 @@ public class PersonDao {
                     e.printStackTrace();
                 }
             }
-
         }
-
         return persons;
     }
 }

@@ -1,7 +1,5 @@
 package result;
 
-import model.Event;
-
 public class EventResult {
 
     private String associatedUsername;
@@ -32,8 +30,6 @@ public class EventResult {
     }
 
     public EventResult() {}
-
-
 
     public String getAssociatedUsername() {
         return associatedUsername;

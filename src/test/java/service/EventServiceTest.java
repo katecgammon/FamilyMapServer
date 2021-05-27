@@ -3,17 +3,13 @@ package service;
 import dao.*;
 import model.AuthToken;
 import model.Event;
-import model.Person;
 import model.User;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import result.AllEventResult;
 import result.EventResult;
-import result.PersonResult;
-
 import java.sql.Connection;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -80,7 +76,7 @@ public class EventServiceTest {
         Event[] events = {newEvent, newEvent1};
         result1 = new AllEventResult(events);
         AllEventResult allEventsResult = service.findAllEvents("1934239280");
-        assertEquals("Error: Problem in getting all events", allEventsResult.getMessage());
+        assertEquals("Error: Invalid AuthToken", allEventsResult.getMessage());
     }
 
 
@@ -111,6 +107,6 @@ public class EventServiceTest {
                 "Denmark", "Nord", "Death", 1850);
         result.setSuccess(true);
         EventResult eventResult = service.find("289347289", "9q823479128370497");
-        assertEquals("Invalid AuthToken", eventResult.getMessage());
+        assertEquals("Error: Invalid AuthToken", eventResult.getMessage());
     }
 }

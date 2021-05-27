@@ -1,7 +1,6 @@
 package dao;
 
 import model.AuthToken;
-
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -66,7 +65,6 @@ public class AuthTokenDao {
                     e.printStackTrace();
                 }
             }
-
         }
         return null;
     }
@@ -95,6 +93,12 @@ public class AuthTokenDao {
         }
     }
 
+    /**
+     *
+     * @throws DataAccessException
+     *
+     * Deletes authtokens that are related to the username
+     */
     public void clearUser(String username) throws DataAccessException {
         String sql = "DELETE FROM AuthToken WHERE username = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

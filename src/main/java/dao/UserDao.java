@@ -1,8 +1,6 @@
 package dao;
 
-import model.Event;
 import model.User;
-
 import java.sql.*;
 import java.util.UUID;
 
@@ -115,7 +113,6 @@ public class UserDao {
     }
 
     /**
-     *
      * @throws DataAccessException
      *
      * Drops the user table
@@ -129,6 +126,11 @@ public class UserDao {
         }
     }
 
+    /**
+     * @throws DataAccessException
+     *
+     * Clears a user from the table
+     */
     public void clearUser(String username) throws DataAccessException {
         String sql = "DELETE FROM User WHERE username = ?";
         try (PreparedStatement stmt = conn.prepareStatement(sql)) {

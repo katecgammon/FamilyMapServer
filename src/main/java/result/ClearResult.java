@@ -4,9 +4,7 @@ public class ClearResult {
     private String message = "Clear failed.";
     private boolean success = false;
 
-    public ClearResult() {
-        //Calls all clear functions of the Dao's.
-    }
+    public ClearResult() {}
 
     public String getMessage() {
         return message;
@@ -23,6 +21,4 @@ public class ClearResult {
     public void setSuccess(boolean success) {
         this.success = success;
     }
-
-
 }

@@ -3,7 +3,6 @@ package handler;
 import java.io.*;
 import java.net.*;
 import com.google.gson.Gson;
-
 import com.sun.net.httpserver.*;
 import dao.DataAccessException;
 import request.RegisterRequest;
@@ -30,8 +29,6 @@ public class RegisterHandler implements HttpHandler {
                 }
                 else {
                     exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                    //exchange.getResponseBody().close();
-
                 }
 
                 OutputStream resBody = exchange.getResponseBody();
@@ -39,7 +36,6 @@ public class RegisterHandler implements HttpHandler {
                 writeString(JSONString, resBody);
                 resBody.close();
                 success = result.getSuccess();
-
             }
         } catch (IOException | DataAccessException e) {
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);

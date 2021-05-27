@@ -45,7 +45,6 @@ public class    LoadService {
             result.setMessage("Successfully added " + userArray.length + " users, " + personArray.length +
                     " persons, and " + eventArray.length + " events to the database.");
             result.setSuccess(true);
-
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);

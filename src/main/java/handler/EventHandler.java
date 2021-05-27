@@ -8,7 +8,6 @@ import dao.DataAccessException;
 import result.AllEventResult;
 import result.EventResult;
 import service.EventService;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -45,7 +44,6 @@ public class EventHandler implements HttpHandler {
                     }
                     else {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-
                     }
 
                     OutputStream resBody = exchange.getResponseBody();

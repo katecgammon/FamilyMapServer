@@ -31,8 +31,6 @@ public class RegisterServiceTest {
                 "Kate", "Gammon", "f");
         newUser = new User("kate123", "gammon456", "kate.gammon@gmail.com",
                 "Kate", "Gammon", "f", "personID");
-//        newUser = new User("userName", "PASSword", "susan@gmail.com",
-//                "Susan", "Queen", "female", "12345");
         Connection conn = db.getConnection();
         db.clearTables();
         uDao = new UserDao(conn);
@@ -56,6 +54,6 @@ public class RegisterServiceTest {
     @Test
     public void registerFail() throws DataAccessException {
         uDao.insert(newUser);
-        assertEquals("Error: Could not register", service.register(request).getMessage());
+        assertEquals("Error: Username already exists", service.register(request).getMessage());
     }
 }

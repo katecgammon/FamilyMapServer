@@ -8,9 +8,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import result.PersonResult;
-
 import java.sql.Connection;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -75,11 +73,8 @@ public class PersonServiceTest {
         Person[] persons = {newPerson};
         result = new PersonResult(persons);
         PersonResult allPeopleResult = service.findAllPeople("1934239280");
-        assertEquals("Error: Problem in getting all persons", allPeopleResult.getMessage());
-
-
+        assertEquals("Error: Invalid AuthToken", allPeopleResult.getMessage());
     }
-
 
     @Test
     public void findPersonPass() throws DataAccessException {
@@ -111,6 +106,6 @@ public class PersonServiceTest {
                 "f", null, null, "1356");
         result.setSuccess(true);
         PersonResult personResult = service.findPerson("289347289", "9q823479128370497");
-        assertEquals("Invalid AuthToken", personResult.getMessage());
+        assertEquals("Error: Invalid AuthToken", personResult.getMessage());
     }
 }

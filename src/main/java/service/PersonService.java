@@ -4,7 +4,6 @@ import dao.*;
 import model.AuthToken;
 import model.Person;
 import result.PersonResult;
-
 import java.sql.Connection;
 import java.util.ArrayList;
 
@@ -33,18 +32,16 @@ public class PersonService {
             if (persons == null) {
                 throw new DataAccessException("Invalid AuthToken");
             }
-            //Person[] personArray = (Person[]) persons.toArray();
             Person[] personArr = new Person[persons.size()];
             personArr = persons.toArray(personArr);
             db.closeConnection(true);
             result = new PersonResult(personArr);
             result.setSuccess(true);
-
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);
-            if (ex.toString().equals("Invalid AuthToken")) {
-                result.setMessage("Invalid AuthToken");
+            if (ex.toString().equals("dao.DataAccessException: Invalid AuthToken")) {
+                result.setMessage("Error: Invalid AuthToken");
             }
             else {
                 result.setMessage("Error: Problem in getting all persons");

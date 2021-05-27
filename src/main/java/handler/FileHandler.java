@@ -3,28 +3,9 @@ package handler;
 import java.io.*;
 import java.net.*;
 import java.nio.file.Files;
-
 import com.sun.net.httpserver.*;
 
 public class FileHandler implements HttpHandler{
-    /*
-    Possible input URLs:
-    /       (convert this to /index.html)
-    /index.html
-    /favicon.ico
-    /css/main.css
-
-    Physical file paths:
-    web/index.html
-    web/favicon.ico
-    web/css/main.css
-
-    When it receives a get request for any of the urls, it will transfer them into physical
-    file names.
-    Then it will open the files
-    Copy the bytes from the file into the response body, and send them back to the browser.
-    And returns the response to the client in the response body.
-     */
 
     @Override
     public void handle(HttpExchange exchange) throws IOException {
@@ -50,5 +31,4 @@ public class FileHandler implements HttpHandler{
         }
         exchange.getResponseBody().close();
     }
-
 }

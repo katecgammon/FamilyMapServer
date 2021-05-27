@@ -6,7 +6,6 @@ import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
 import result.ClearResult;
 import service.ClearService;
-
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
@@ -37,7 +36,6 @@ public class ClearHandler implements HttpHandler {
                 writeString(JSONString, resBody);
                 resBody.close();
                 success = true;
-
             }
         } catch (IOException | DataAccessException e) {
             exchange.sendResponseHeaders(HttpURLConnection.HTTP_SERVER_ERROR, 0);

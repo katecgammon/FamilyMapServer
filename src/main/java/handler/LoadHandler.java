@@ -7,7 +7,6 @@ import dao.DataAccessException;
 import request.LoadRequest;
 import result.LoadResult;
 import service.LoadService;
-
 import java.io.*;
 import java.net.HttpURLConnection;
 
@@ -22,7 +21,6 @@ public class LoadHandler implements HttpHandler {
                 String reqData = readString(reqBody);
                 Gson gson = new Gson();
                 LoadRequest request = (LoadRequest) gson.fromJson(reqData, LoadRequest.class);
-
                 LoadService service = new LoadService();
                 LoadResult result = service.load(request);
 
