@@ -11,6 +11,7 @@ public class EventResult {
     private float longitude;
     private String country;
     private String city;
+    private String eventType;
     private int year;
     private String message;
     private boolean success = false;
@@ -20,7 +21,7 @@ public class EventResult {
     }
 
     public EventResult(String associatedUsername, String eventID, String personID, float latitude,
-                       float longitude, String country, String city, int year) {
+                       float longitude, String country, String city, String eventType, int year) {
         this.associatedUsername = associatedUsername;
         this.eventID = eventID;
         this.personID = personID;
@@ -28,6 +29,7 @@ public class EventResult {
         this.longitude = longitude;
         this.country = country;
         this.city = city;
+        this.eventType = eventType;
         this.year = year;
     }
 
@@ -105,7 +107,7 @@ public class EventResult {
         this.year = year;
     }
 
-    public boolean isSuccess() {
+    public boolean getSuccess() {
         return success;
     }
 

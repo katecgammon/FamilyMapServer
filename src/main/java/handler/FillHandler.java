@@ -5,11 +5,8 @@ import com.sun.net.httpserver.HttpExchange;
 import com.sun.net.httpserver.HttpHandler;
 import dao.DataAccessException;
 import request.FillRequest;
-import request.LoadRequest;
 import result.FillResult;
-import result.LoadResult;
 import service.FillService;
-import service.LoadService;
 
 import java.io.*;
 import java.net.HttpURLConnection;
@@ -39,7 +36,6 @@ public class FillHandler implements HttpHandler{
                     numGenerations = Integer.parseInt(numGen);
                 }
                 FillRequest request = new FillRequest(username, numGenerations);
-
                 FillService service = new FillService();
                 FillResult result = service.fill(request);
 

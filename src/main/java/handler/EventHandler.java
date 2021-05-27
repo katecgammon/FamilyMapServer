@@ -24,8 +24,8 @@ public class EventHandler implements HttpHandler {
         boolean success = false;
 
         String URLPath1 = exchange.getRequestURI().toString();
-        if (!URLPath1.equals("/person")) {
-            URLPath = URLPath1.substring("/person/".length());
+        if (!URLPath1.equals("/event")) {
+            URLPath = URLPath1.substring("/event/".length());
         }
 
         Headers reqHeaders = exchange.getRequestHeaders();
@@ -54,19 +54,18 @@ public class EventHandler implements HttpHandler {
                 }
                 else {
                     result = service.find(URLPath, authToken);
-                    if (result != null) {
+                    if (result.getSuccess()) {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_OK, 0);
                     }
                     else {
                         exchange.sendResponseHeaders(HttpURLConnection.HTTP_BAD_REQUEST, 0);
-                        exchange.getResponseBody().close();
                     }
 
                     OutputStream resBody = exchange.getResponseBody();
                     String JSONString = gson.toJson(result);
                     writeString(JSONString, resBody);
                     resBody.close();
-                    success = true;
+                    success = result.getSuccess();
                 }
             }
         } catch (IOException | DataAccessException e) {

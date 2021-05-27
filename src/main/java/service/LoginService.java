@@ -35,8 +35,9 @@ public class LoginService {
             if (!userDao.verify(r.getUsername(), r.getPassword())) {
                 throw new DataAccessException("Username and Password don't match");
             }
+            String userName = r.getUsername();
             String personID = userDao.find(r.getUsername()).getPersonID();
-            AuthToken authToken = new AuthToken(authTokenDao.generateAuthToken(), personID);
+            AuthToken authToken = new AuthToken(authTokenDao.generateAuthToken(), userName);
             authTokenDao.insert(authToken);
             
 

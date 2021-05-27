@@ -8,6 +8,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class PersonDao {
     private final Connection conn;
@@ -15,6 +16,11 @@ public class PersonDao {
     public PersonDao(Connection conn)
     {
         this.conn = conn;
+    }
+
+    public String generatePersonID() {
+        UUID ID = UUID.randomUUID();
+        return ID.toString();
     }
 
     /**

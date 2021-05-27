@@ -1,7 +1,6 @@
 package service;
 
 import dao.*;
-import model.AuthToken;
 import model.Event;
 import model.Person;
 import model.User;
@@ -10,11 +9,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import request.LoadRequest;
 import result.LoadResult;
-
 import java.sql.Connection;
 import java.util.Arrays;
-
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class LoadServiceTest {
     private Database db;

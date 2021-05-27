@@ -90,7 +90,7 @@ public class EventServiceTest {
                 "Denmark","Nord", "Death", 1850);
         eDao.insert(newEvent1);
         result = new EventResult("kate123", "19238", "12345", (float)81.6, (float)-15.3333,
-                "Denmark", "Nord", 1850);
+                "Denmark", "Nord", "Death", 1850);
         EventResult eventResult = service.find("19238", "882393412834719");
         assertNotNull(eventResult);
         assertEquals(result.getCity(), eventResult.getCity());
@@ -105,7 +105,7 @@ public class EventServiceTest {
                 "Denmark","Nord", "Death", 1850);
         eDao.insert(newEvent1);
         result = new EventResult("kate123", "19238", "12345", (float)81.6, (float)-15.3333,
-                "Denmark", "Nord", 1850);
+                "Denmark", "Nord", "Death", 1850);
         result.setSuccess(true);
         EventResult eventResult = service.find("289347289", "9q823479128370497");
         assertEquals("Invalid AuthToken", eventResult.getMessage());

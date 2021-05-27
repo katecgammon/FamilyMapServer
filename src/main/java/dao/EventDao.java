@@ -4,6 +4,7 @@ import model.Event;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.UUID;
 
 public class EventDao {
     private final Connection conn;
@@ -13,6 +14,12 @@ public class EventDao {
         this.conn = conn;
     }
 
+
+
+    public String generateEventID() {
+        UUID ID = UUID.randomUUID();
+        return ID.toString();
+    }
     /**
      * inserts a new Event into the event table
      * @param event

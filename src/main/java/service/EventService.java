@@ -86,20 +86,20 @@ public class EventService {
             }
             db.closeConnection(true);
             result = new EventResult(event.getUsername(), event.getEventID(), event.getPersonID(), event.getLatitude(),
-                    event.getLongitude(), event.getCountry(), event.getCity(), event.getYear());
+                    event.getLongitude(), event.getCountry(), event.getCity(), event.getEventType(), event.getYear());
             result.setSuccess(true);
 
         }
         catch (DataAccessException ex) {
             result.setSuccess(false);
             if (ex.toString().equals("dao.DataAccessException: Invalid AuthToken")) {
-                result.setMessage("Invalid AuthToken");
+                result.setMessage("Error: Invalid AuthToken");
             }
             else if (ex.toString().equals("dao.DataAccessException: Invalid PersonID")) {
-                result.setMessage("Invalid PersonID");
+                result.setMessage("Error: Invalid PersonID");
             }
             else if (ex.toString().equals("dao.DataAccessException: Requested person does not belong to this user")) {
-                result.setMessage("Requested person does not belong to this user");
+                result.setMessage("Error: Requested person does not belong to this user");
             }
             else {
                 result.setMessage("Error: Problem in getting person");

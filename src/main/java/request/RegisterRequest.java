@@ -67,13 +67,4 @@ public class RegisterRequest {
     }
 }
 
-/*JSON string
-    //REGISTER HANDLER
-    RegisterRequest request = gson.fromJson(jsonString, RegisterRequest.class);
-RegisterService service = new RegisterService();
-RegisterResult result = service.register(request);
-String resultJsonString = gson.toJson(result);
-
-Return resultJsonString to client*/
-
 
